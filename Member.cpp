@@ -62,6 +62,8 @@ void Member::print(){
 
 
 bool Member::follow(Member& a){
+	if(a==this)
+		return false;
   bool flag=true;
           //Check if you not following this person already
           for (int i=0;i< mFollow.size()&&flag;i++) {
@@ -84,6 +86,8 @@ return false;
 }//end follow
 
 bool Member::unfollow(Member& a){
+	if(a==this)
+		return false;
   bool flag=true;
   for (int i=0;i< mFollow.size()&&flag;i++) {
       if (mFollow.at(i) ==&a) flag= false;
