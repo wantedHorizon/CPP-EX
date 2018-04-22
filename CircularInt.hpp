@@ -1,6 +1,6 @@
 #include<iostream>
 #include<string>
-
+#include "CircularInt.cpp"
 using namespace std;
 
 class CircularInt {
