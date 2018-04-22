@@ -22,7 +22,7 @@ int main() {
 		cout << message << endl;     // "There is no number x in {1,12} such that x*3=10"
 	}
 
-	// RIDDLES (not for submission): 
+	// RIDDLES (not for submission):
 	//  * when is there exactly one answer to a/b?
 	//  * when are there two or more answers to a/b?
 	//	* when is there no answer to a/b?

@@ -1,15 +1,12 @@
 CXX=clang++-5.0
-CXXFLAGS=-std=c++17 
+CXXFLAGS=-std=c++17
 
-all: main.o CircularInt.o
-	$(CXX) $(CXXFLAGS) CircularInt.o main.o
+all:
+	$(CXX) $(CXXFLAGS) *.cpp -o a.out
 	./a.out
 
-CircularInt.o: CircularInt.cpp CircularInt.hpp
-	$(CXX) $(CXXFLAGS) -c CircularInt.cpp -o CircularInt.o
+run:
+	./a.out
 
-main.o: main.cpp CircularInt.hpp
-	$(CXX) $(CXXFLAGS) -c main.cpp -o main.o
-
-clean:
-	rm *.o a.out
+cm:
+	g++ -std=c++17 Member.cpp main.cpp

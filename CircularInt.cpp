@@ -1,71 +1,79 @@
+
 #include <string>
+
 #include <stdexcept>
 #include <algorithm>
 #include <iostream>
 
 #include "CircularInt.hpp"
 
+  //constractor
+  CircularInt::	CircularInt(int start,int end){
+    if(end>start){
+      st=start;
+      ed=end;
+      range=ed-st+1;
+      current=st;
+    }
+    else{
+      cout<<"error :range problem"<<endl;
 
-//Constructor
-CircularInt::CircularInt(int newStart, int newEnd) {
-    start=newStart;
-    end=newEnd;
-    currentInt=newStart;
-}
+    }
+  }//end constractor
 
-//Destructor
-CircularInt::~CircularInt() {
+  //destructor
+  CircularInt::~CircularInt() {
 
-}
-
-ostream& operator<<(ostream& output, const CircularInt& X) {
-    output << X.currentInt ;
-    return output;
-}
-
-bool CircularInt::operator >(const CircularInt &X) const {
-    return currentInt > X.currentInt;
-}
-
-bool CircularInt::operator >=(const CircularInt &X) const {
-    return currentInt >= X.currentInt;
-}
+    cout<<"CircularInt ruined"<<endl;
+  }
 
 
-bool CircularInt::operator <(const CircularInt &X) const {
-    return currentInt < X.currentInt;
-}
+   ostream& operator<<(ostream& os, const CircularInt& Y)
+  {
+  os << "(" << Y.current<<")";
+  return os;
+  }
 
-bool CircularInt::operator <=(const CircularInt &X) const {
-    return currentInt <= X.currentInt;
-}
+  bool CircularInt::operator >(const CircularInt& other) const{
+    return this->current>other.current;
+  }
 
-
-CircularInt& CircularInt::operator =( int x) {
-    this->currentInt=x%this->end;
+  bool CircularInt::operator <(const CircularInt& other) const{
+    return this->current<other.current;
+  }
+  bool CircularInt::operator >=(const CircularInt& other) const{
+    return this->current>=other.current;
+  }
+  bool CircularInt::operator <=(const CircularInt& other) const{
+    return this->current<=other.current;
+  }
+  CircularInt& CircularInt::operator =( int y) {
+    this->current= y%this->ed;
     return *this;
 }
 
-CircularInt& CircularInt::operator +=( int x) {
-    this->currentInt=(this->currentInt+x)%this->end;
-    return *this;
+CircularInt& CircularInt::operator +=( int y) {
+  this->current=(this->current+y)%this->range;
+  return *this;
 }
 
-CircularInt& CircularInt::operator -=( int x) {
-    this->currentInt=(this->currentInt-x)%this->end;
-    if(this->currentInt<0)
-        this->currentInt+=12;
-    return *this;
+CircularInt& CircularInt::operator -=( int y) {
+  this->current=(this->current-y)%this->range;
+  if(this->current<st ){
+    this->current+=range;
+    /* data */
+  }
+  return *this;
 }
 
-CircularInt& CircularInt::operator *=( int x) {
-    this->currentInt=(this->currentInt*x)%this->end;
-    return *this;
+CircularInt& CircularInt::operator *=( int y) {
+  this->current=(this->current*y)%this->range;
+  return *this;
 }
 
-CircularInt& CircularInt::operator /=( int x) {
-    if(this->currentInt%x==0){
-        this->currentInt=(this->currentInt/x)%this->end;
+CircularInt& CircularInt::operator /=( int y) {
+    if(this->current%y==0){
+        this->current=(this->current/y)%this->range;
         return *this;
     }
     else
@@ -73,58 +81,53 @@ CircularInt& CircularInt::operator /=( int x) {
 
 }
 
-CircularInt& CircularInt::operator %=( int x) {
-    this->currentInt=(this->currentInt%x)%this->end;
+
+CircularInt& CircularInt::operator %=( int y) {
+    this->current=(this->current%y)%this->range;
     return *this;
 }
 
-
-
-// prefix increment operator
 CircularInt& CircularInt::operator++() {
-    currentInt ++;
+    current ++;
     return *this;
 }
 
-// postfix increment operator
+
 CircularInt& CircularInt::operator++(int) {
     CircularInt temp(*this);
     ++*this;
     return temp;
 }
 
-
-
-int CircularInt:: operator+( CircularInt& x) {
-    return (this->currentInt+x.currentInt)%this->end;
+int CircularInt:: operator+( CircularInt& other) {
+    return (this->current+ other.current)%this->range;
 }
+
 
 
 int CircularInt:: operator-() {
-    int ans=this->currentInt*(-1);
-    while (ans<0){
-        ans+=this->end;
+    int ans=this->current*(-1);
+    while (ans<st){
+        ans+=this->range;
     }
-    return ans%this->end;
+    return ans%this->ed;
 }
 
-
-int CircularInt:: operator /( int x){
-    if(this->currentInt%x==0){
-        this->currentInt=(this->currentInt/x)%this->end;
-        return this->currentInt;
+int CircularInt:: operator /( int y){
+    if(this->current%y==0){
+        this->current=(this->current/y)%this->range;
+        return this->current;
     }
     else{
-        cout<<"There is no number x in {"<<this->start<<", "<<this->end<<
-                  "} such that x*"<<x<<"="<<this->currentInt;
-        //throw logic_error();
+        cout<<"There is no number y in {"<<this->st<<", "<<this->ed<<
+                  "} such that y*"<<y<<"="<<this->current;
     }
 
 }
 
-int operator-(int y, CircularInt&x) {
-    int ans=(y-x.currentInt)%x.end;
-    if(ans<=0)
-        ans+=x.end;
+int operator-(int y, CircularInt& other) {
+    int ans=(y-other.current)%other.range;
+    while(ans<other.st)
+        ans+=other.ed;
     return ans;
 }

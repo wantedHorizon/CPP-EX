@@ -1,43 +1,45 @@
+
+#ifndef _CRR_H
+#define _CRR_H
+
 #include<iostream>
 #include<string>
 
 using namespace std;
 
 class CircularInt {
-
+	int range, st,ed,current;
 
 public:
+	//constractor
+	CircularInt(int start,int end);
 
-    //Constructor
-    CircularInt(int newStart, int newEnd);
+	//destructor
+	~CircularInt();
 
-    //Destructor
-    ~CircularInt();
+friend	ostream& operator<<(ostream& os, const CircularInt& Y) ;
 
-    friend ostream& operator<<(ostream& output, const CircularInt& H);
+	bool operator >(const CircularInt& other) const;
+	bool operator <(const CircularInt& other) const;
+	bool operator <= (const CircularInt& other) const;
+	bool operator >=(const CircularInt& other) const;
 
-    bool operator >(const CircularInt& X) const;
-    bool operator >=(const CircularInt& X) const;
-    bool operator <(const CircularInt& X) const;
-    bool operator <=(const CircularInt& X) const;
+	CircularInt& operator =( int y);
+	CircularInt& operator +=( int y);
+	CircularInt& operator -=( int y);
+	CircularInt& operator *=( int y);
+	CircularInt& operator /=( int y);
+	CircularInt& operator %=( int y);
 
-    CircularInt& operator =( int x);
-    CircularInt& operator +=( int x);
-    CircularInt& operator -=( int x);
-    CircularInt& operator *=( int x);
-    CircularInt& operator /=( int x);
-    CircularInt& operator %=( int x);
+	CircularInt& operator ++();
+	CircularInt& operator ++( int);
+		int operator+( CircularInt& y);
+	int operator-();
+	int operator /( int x);
 
-    CircularInt& operator ++();
-    CircularInt& operator ++( int);
-    int operator+( CircularInt& x);
-    int operator-();
-    int operator /( int x);
-
-    friend int operator-(int y, CircularInt&x);
+	friend int operator-(int y, CircularInt&x);
 
 
-private:
-    int start, end, currentInt;
 
 };
+#endif//_CRR_H
