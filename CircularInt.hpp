@@ -37,7 +37,7 @@ friend	ostream& operator<<(ostream& os, const CircularInt& Y) ;
 	int operator-();
 	int operator /( int x);
 
-	friend int operator-(int y, CircularInt&x);
+	friend int operator-(int y, CircularInt& other);
 
 
 
