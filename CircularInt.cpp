@@ -121,6 +121,7 @@ int CircularInt:: operator /( int y){
     else{
         cout<<"There is no number y in {"<<this->st<<", "<<this->ed<<
                   "} such that y*"<<y<<"="<<this->current;
+                  return -1;
     }
 
 }
