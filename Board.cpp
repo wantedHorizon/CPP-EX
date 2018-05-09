@@ -1,0 +1,77 @@
+#include <iostream>
+#include "Board.h"
+using namespace std;
+
+
+Board::Board(int nLength)
+{
+    this->length = nLength;
+    for (int i = 0; i < length; i++)
+        brd.push_back(vector<Data>(length));
+      }
+
+
+
+//-----operators----
+Board& Board::operator=(char ch)
+{
+    if(ch == '.')
+        *this=Board{length};
+
+    else{
+        IllegalCharException cc;
+        cc.setChar(ch);
+        throw cc;
+    }
+
+    return *this;
+}
+
+Board& Board::operator=(const Board& other){
+
+    if(other.length==this->length){
+      for (int i = 0; i <length ; ++i)
+          for (int j = 0; j <length ; ++j)
+              brd[i][j]=other.brd[i][j];
+
+}
+
+
+
+
+    else{  IllegalCoordinateException cc{other.length};
+      throw cc;
+
+            }
+
+
+
+              return *this;
+}
+
+ostream& operator<<(ostream& os, const Board& other){
+
+    for (size_t i = 0; i <other.length ; ++i){
+        for (size_t t = 0; t <other.length ; ++t){
+            cout<<other.brd[i][t]<< " ";
+          }
+        cout<<endl;
+}
+    return os;
+
+}
+
+
+
+
+
+
+Data& Board::operator [](Location loc)
+{
+    if(loc.getx() < 0 || loc.gety() < 0 ||
+       loc.getx() >= length || loc.gety() >= length){
+        IllegalCoordinateException ss{loc};
+        throw ss;
+    }
+    return brd[loc.getx()][loc.gety()];
+}

@@ -1,37 +1,59 @@
+#include "Board.h"
+
 #include <iostream>
-#include "Member.h"
 using namespace std;
 
-Member avi,chana,beni;
-
-
-void test1() {
-    Member dana;
-    chana.follow(dana);
-    dana.follow(avi);
-    cout << "  " << chana.numFollowers() << " " <<  chana.numFollowing() << endl; // 0 1
-    cout << "  " << avi.numFollowers() << " " <<  avi.numFollowing() << endl; // 1 0
-    cout << "  " << Member::count() << endl; // 4
-}
-
 int main() {
+    Board board1{4};  // Initializes a 4x4 board
+    cout << board1 << endl;   /* Shows an empty board:
+	....
+	....
+	....
+	....
+	*/
+    cout << board1[{1,2}] << endl; // .
+    board1[{1,1}]='X';
+    board1[{1,2}]='O';
+    char c = board1[{1,2}]; cout << c << endl; // O
+    cout << board1 << endl;  /* Shows the following board:
+	....
+	.XO.
+	....
+	....
+	*/
+    try {
+        board1[{3,4}]='O';   // This should raise an exception
+    } catch (const IllegalCoordinateException& ex) {
+        cout << "Illegal coordinate: " << ex.theCoordinate() << endl;  // prints "Illegal coordinate: 3,4"
+    }
 
-    cout << avi.numFollowers() << " " << avi.numFollowing() << endl; // 0 0
-    avi.follow(beni);
-    cout << avi.numFollowers() << " " << avi.numFollowing() << endl; // 0 1
-    cout << beni.numFollowers() << " " << beni.numFollowing() << endl; // 1 0
-    cout << Member::count() << endl; // 3
-    cout << endl;
+    board1 = '.';     // Fill the entire board with "."
+    cout << "Here" << endl;
+//
+    cout << board1 << endl;  /* Shows an empty board, as above */
+    try {
+        board1 = 'a';        // This should raise an exception
+    } catch (const IllegalCharException& ex) {
+        cout << "Illegal char: " << ex.theChar() << endl;  // "Illegal char: a"
+    }
 
-    avi.follow(beni); // duplicate follow has no effect
-    cout << avi.numFollowers() << " " << avi.numFollowing() << endl; // 0 1
-    avi.unfollow(beni);
-    cout << avi.numFollowers() << " " << avi.numFollowing() << endl; // 0 0
-    cout << endl;
+    try {
+        board1[{0,1}] = 'x';  // This should raise an exception
+    } catch (const IllegalCharException& ex) {
+        cout << "Illegal char: " << ex.theChar() << endl;  // "Illegal char: x"
+    }
 
-    cout << chana.numFollowers() << " " <<  chana.numFollowing() << endl; // 0 0
-  test1();
-    cout <<"chana "<< chana.numFollowers() << " " <<  chana.numFollowing() << endl; // 0 0
-    cout <<"avi "<< avi.numFollowers() << " " <<  avi.numFollowing() << endl; // 0 0
-    cout << Member::count() << endl; // 3
+    Board board2 = board1;
+    board2[{0,0}] = 'X';
+    cout << board1 << endl;  /* Shows an empty board, as above */
+    cout << board2 << endl;  /* Shows a board with an X at top-left */
+
+    board1 = board2;
+    board1[{3,3}] = 'O';
+    cout << board2 << endl;  /* Shows a board with an X at top-left */
+    cout << board1 << endl;  /* Shows a board with an X at top-left and O at bottom-right */
+
+    cout << "Good bye!" << endl;
+
+    return 0;
 }
