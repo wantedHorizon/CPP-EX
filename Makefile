@@ -4,8 +4,6 @@ CPPFLAGS=-std=c++17
 CCX=g++ -std=c++11
 
 
-a.out: all
-		$(CCX) main.cpp *.o
 all: Board.o Data.o
 
 Board.o: Board.cpp Board.h
