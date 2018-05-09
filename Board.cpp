@@ -63,8 +63,18 @@ Board& Board::operator=(const Board& other)
 
 
     }
+    else{
+      *this=Board{other.getL()};
+      for (int i = 0; i <length ; ++i) {
+          for (int j = 0; j <length ; ++j) {
+              brd[i][j]=other.brd[i][j];
+          }
 
-    
+      }
+
+    }
+
+
 
     return *this;
 }
