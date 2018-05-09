@@ -1,14 +1,26 @@
+CCX=g++ -std=c++11
 
-CXX=clang++-5.0
-RM=rm -f
-CPPFLAGS=-std=c++17
 
-all:
-	$(CXX) $(CPPFLAGS) *.cpp -o a.out
-	./a.out
-
+a.out: Board.o Index.o Element.o IllegalCharException.o IllegalCoordinateException.o
+		$(CCX) main.cpp *.o
+		
 Board.o: Board.cpp Board.h
-	$(CXX) $(CPPFLAGS) --compile Board.cpp -o Board.o
+		$(CCX) -c Board.cpp
+		
+Index.o: Index.cpp Index.h
+		$(CCX) -c Index.cpp
+		
+Element.o: Element.cpp Element.h
+		$(CCX) -c Element.cpp
 
-clean:
-	$(RM) *.exe a.out *.class
+# Symbol.o: Symbol.h
+# 		$(CCX) -c Symbol.h
+
+IllegalCharException.o: IllegalCharException.cpp
+		$(CCX) -c IllegalCharException.cpp
+
+IllegalCoordinateException.o: IllegalCoordinateException.cpp
+		$(CCX) -c IllegalCoordinateException.cpp
+		
+Clean:
+		rm *.o a.out
