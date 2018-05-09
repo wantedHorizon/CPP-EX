@@ -64,10 +64,7 @@ Board& Board::operator=(const Board& other)
 
     }
 
-    else{
-      IllegalCoordinateException ce{other.length};
-      throw ce;
-    }
+    
 
     return *this;
 }
