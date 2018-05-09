@@ -1,60 +1,41 @@
-#pragma once
+//board game class for tic tac toe game X||O
+
+#ifndef TICTACTOE_BOARD_H
+#define TICTACTOE_BOARD_H
+
 #include <iostream>
+#include <vector>
+#include "Location.h"
+
+#include "Data.h"
+#include "IllegalCharException.h"
+
+#include "IllegalCoordinateException.h"
+
 using namespace std;
 
-#include "IllegalCharException.h"
-#include "IllegalCoordinateException.h"
-#include "Coordinate.h"
+class Board{
 
+private:
+    vector<vector<Data> > brd;
 
-class BoardLocation {
-	char& loc;
+    int length;
 public:
-	BoardLocation(char& loc): loc(loc) {}
-	BoardLocation& operator=(char c);
-	operator char() const { return loc; }
-};
-/**
- * Represents a tic-tac-toe board.
- */
-class Board {
-	char* theChars;
-	int theSize;
+  //  Board();
+  //constrator
+    Board(int nLength=2);
+    ~Board(){}
 
-	uint offset(int x, int y) const {
-		return x + y*theSize;
-	}
+//opertaors
+    Board& operator=(const char newVal);
+    Board& operator=(const Board& other);
+    int getL() const;
+    friend ostream& operator<<(ostream& os, const Board& other);
+    bool verify(const char ch);
+    bool verify(const Board& other);
+    Data& operator [](Location loc);
 
-public:
-	Board(int size): theSize(size), theChars(new char[size*size]) {
-		operator=('.');
-	}
-
-	Board& operator=(char c);
-
-	char operator[] (Coordinate c) const {
-		if (c.x>=theSize || c.x<0 || c.y>=theSize || c.y<0)
-			throw IllegalCoordinateException{c};
-		return theChars[offset(c.x,c.y)];
-	}
-
-	BoardLocation operator[] (Coordinate c) {
-		if (c.x>=theSize || c.x<0 || c.y>=theSize || c.y<0)
-			throw IllegalCoordinateException{c};
-		return BoardLocation(theChars[offset(c.x,c.y)]);
-	}
-
-	ostream& output(ostream& out) const {
-		for (int y=0; y<theSize; ++y) {
-			for (int x=0; x<theSize; ++x) {
-				out << theChars[offset(x,y)];
-			}
-			out << endl;
-		}
-		return out;
-	}
 };
 
-inline ostream& operator<<(ostream& out, const Board& board) {
-	return board.output(out);
-}
+
+#endif //TICTACTOE_BOARD_H
