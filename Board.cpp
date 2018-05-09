@@ -29,7 +29,7 @@ Board& Board::operator=(char ch)
 
 
 
-/*
+
 Board& Board::operator=(const Board& other){
     if(other.length!=this->length)
     *this=Board{other.getL()};
@@ -38,22 +38,19 @@ Board& Board::operator=(const Board& other){
           for (int j = 0; j <length ; ++j)
               brd[i][j]=other.brd[i][j];
 
+              return *this;
 
 
 
 
 
-    else{  IllegalCoordinateException cc{other.length};
-      throw cc;
-
-            }
 
 
 
               return *this;
 }
-*/
 
+/*
 Board& Board::operator=(const Board& other)
 {
     if(other.length!=length){
@@ -71,7 +68,7 @@ Board& Board::operator=(const Board& other)
     }
 
     return *this;
-}
+}*/
 ostream& operator<<(ostream& os, const Board& other){
 
     for (size_t i = 0; i <other.length ; ++i){
