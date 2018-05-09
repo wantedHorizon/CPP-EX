@@ -28,7 +28,7 @@ Board& Board::operator=(char ch)
 }
 
 Board& Board::operator=(const Board& other){
-
+  if(verify(other)){
     if(other.length==this->length){
       for (int i = 0; i <length ; ++i)
           for (int j = 0; j <length ; ++j)
@@ -36,7 +36,7 @@ Board& Board::operator=(const Board& other){
 
 }
 
-
+}
 
 
     else{  IllegalCoordinateException cc{other.length};
@@ -74,4 +74,29 @@ Data& Board::operator [](Location loc)
         throw ss;
     }
     return brd[loc.getx()][loc.gety()];
+}
+
+//
+bool Board::verify(const char ch){
+  if(ch=='X'||ch=='O'||ch=='.')
+    return true;
+  else{
+      IllegalCharException cc;
+      cc.setChar(ch);
+      throw cc;
+
+      return false;
+    }
+}
+
+bool Board::verify(const Board& other){
+  for (int i = 0; i <length ; ++i)
+      for (int j = 0; j <length ; ++j){
+        if(!verify(other.brd[i][j]))
+        return false;
+
+
+      }
+      return true;
+
 }
