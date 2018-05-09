@@ -53,7 +53,7 @@ ostream& operator<<(ostream& os, const Board& other){
 
     for (size_t i = 0; i <other.length ; ++i){
         for (size_t t = 0; t <other.length ; ++t){
-            cout<<other.brd[i][t]<< " ";
+            cout<<other.brd[i][t]<< "";
           }
         cout<<endl;
 }
