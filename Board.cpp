@@ -10,7 +10,7 @@ Board::Board(int nLength)
         brd.push_back(vector<Data>(length));
       }
 
-
+int Board::getL() const {return length;}
 
 //-----operators----
 Board& Board::operator=(char ch)
@@ -27,24 +27,29 @@ Board& Board::operator=(char ch)
     return *this;
 }
 
+
+
+
 Board& Board::operator=(const Board& other){
-  if(verify(other)){
-    if(other.length==this->length){
+    if(other.length!=this->length)
+    *this=Board{other.getL()};
+
       for (int i = 0; i <length ; ++i)
           for (int j = 0; j <length ; ++j)
               brd[i][j]=other.brd[i][j];
 
-}
 
-}
 
+
+
+/*
 
     else{  IllegalCoordinateException cc{other.length};
       throw cc;
 
             }
 
-
+*/
 
               return *this;
 }

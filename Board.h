@@ -28,7 +28,7 @@ public:
 //opertaors
     Board& operator=(const char newVal);
     Board& operator=(const Board& other);
-
+    int getL() const;
     friend ostream& operator<<(ostream& os, const Board& other);
     bool verify(const char ch);
     bool verify(const Board& other);
