@@ -27,6 +27,9 @@ public:
     ~Board(){}
 
 //opertaors
+friend  bool operator!=(const Board& a,const Board& b);
+friend  bool operator ==(const Board& a,const Board& b);
+
     Board& operator=(const char newVal);
     Board& operator=(const Board& other);
     int getL() const;

@@ -64,7 +64,7 @@ Board& Board::operator=(const Board& other)
 
     }
 
-  
+
     return *this;
 }
 ostream& operator<<(ostream& os, const Board& other){
@@ -79,7 +79,19 @@ ostream& operator<<(ostream& os, const Board& other){
 
 }
 
-
+bool operator==(const Board& a,const Board& b){
+   if(a.length!=b.length)
+return false;   
+  for (size_t i = 0; i <a.length ; ++i){
+      for (size_t t = 0; t <a.length ; ++t){
+          if(a.brd[i][t]!=b.brd[i][t])
+          return false;
+}}
+return true;
+}
+bool operator!=(const Board& a,const Board& b){
+  return !(a==(b) );
+}
 
 
 
