@@ -1,6 +1,3 @@
-//
-// Created by yarin665 on 04/05/18.
-//
 
 #ifndef LOCATION_H
 #define LOCATION_H
